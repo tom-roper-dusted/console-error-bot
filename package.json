@@ -1,0 +1,21 @@
+{
+  "name": "console-error-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Puppeteer bot for collecting browser console errors from websites.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "check": "node src/index.js",
+    "check:headed": "HEADLESS=false node src/index.js",
+    "slack:test": "node src/slack-test.js",
+    "alert:test-once": "node src/trigger-test-alert.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "puppeteer": "^24.9.0"
+  }
+}
