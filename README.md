@@ -6,10 +6,7 @@ Minimal Node.js bot that uses Puppeteer to load websites and collect:
 - uncaught page errors
 - failed network requests
 
-The current starter setup checks two URLs by default:
-
-- `https://wealthtime.com`
-- `https://dusted.com`
+The current setup checks a configured list of target URLs from `.env`.
 
 ## Setup
 
@@ -31,7 +28,7 @@ cp .env.example .env
 npm run check
 ```
 
-The default `.env` is already configured for a visible browser window.
+The default `.env` is configured for a visible browser window on a local machine.
 
 ## Configuration
 
@@ -53,10 +50,10 @@ The repo includes [scripts/run-check.sh](/Users/tomroper/console-error-bot/scrip
 - appends output to `logs/cron.log`
 - prevents overlapping runs with a simple lock directory
 
-Current cron target:
+Example local cron target:
 
 ```cron
-*/10 * * * * /Users/tomroper/console-error-bot/scripts/run-check.sh
+*/10 * * * * /absolute/path/to/console-error-bot/scripts/run-check.sh
 ```
 
 Note: a non-headless browser under `cron` can be unreliable on macOS because `cron` is not a GUI-first launcher. If you start seeing Chrome launch failures or invisible windows, the next step should be a `LaunchAgent` instead of `cron`.
@@ -65,7 +62,7 @@ Note: a non-headless browser under `cron` can be unreliable on macOS because `cr
 
 Current Slack setup:
 
-- sends alerts only when a run has console/page errors
+- sends alerts only when a run has browser `console.error` entries
 - posts to `SLACK_CHANNEL_ID` using `chat.postMessage`
 - includes the report path and a short per-site summary
 
@@ -95,6 +92,6 @@ Each run:
 - records uncaught page errors
 - records failed requests
 - writes a JSON report to `reports/`
-- exits with code `1` when errors are found
+- exits with code `1` when browser `console.error` entries are found
 
 That non-zero exit code will be useful later for cron monitoring and alerting.
