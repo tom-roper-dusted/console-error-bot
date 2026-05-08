@@ -17,6 +17,161 @@ async function ensureOutputDir(outputDir) {
   await fs.mkdir(outputDir, { recursive: true });
 }
 
+async function handleHiclAccessFlow(page, url) {
+  if (!url.includes("hicl.com")) {
+    return;
+  }
+
+  try {
+    await page.waitForSelector("#region2", {
+      timeout: 8000,
+      visible: true,
+    });
+
+    await page.evaluate(() => {
+      const residence = document.querySelector("#region2");
+      const location = document.querySelector("#region");
+      const residenceForm = residence ? residence.closest("form") : null;
+
+      if (!residence || !location || !residenceForm) {
+        return false;
+      }
+
+      residence.value = "united-kingdom";
+      residence.dispatchEvent(new Event("change", { bubbles: true }));
+      residence.dispatchEvent(new Event("input", { bubbles: true }));
+
+      location.value = "united-kingdom";
+      location.dispatchEvent(new Event("change", { bubbles: true }));
+      location.dispatchEvent(new Event("input", { bubbles: true }));
+
+      return true;
+    });
+
+    await page.evaluate(() => {
+      const residence = document.querySelector("#region2");
+      const residenceForm = residence ? residence.closest("form") : null;
+
+      if (!residenceForm) {
+        return false;
+      }
+
+      if (typeof residenceForm.requestSubmit === "function") {
+        residenceForm.requestSubmit();
+      } else {
+        residenceForm.submit();
+      }
+
+      return true;
+    });
+    await delay(1500);
+    await page.waitForSelector("a[href='./?disclaimer=accept']", {
+      timeout: 8000,
+      visible: true,
+    });
+
+    await page.evaluate(() => {
+      const acceptLink = document.querySelector("a[href='./?disclaimer=accept']");
+      if (acceptLink) {
+        acceptLink.click();
+        return true;
+      }
+      return false;
+    });
+    await delay(3000);
+  } catch {
+    // HICL's residence/disclaimer flow is best-effort. If it is absent or
+    // changes shape, continue without turning it into a false site error.
+  }
+}
+
+async function handleTrigAccessFlow(page, url) {
+  if (!url.includes("trig-ltd.com")) {
+    return;
+  }
+
+  try {
+    await page.waitForSelector("#region", {
+      timeout: 8000,
+      visible: true,
+    });
+
+    await page.evaluate(() => {
+      const residence = document.querySelector("#region");
+      const country = document.querySelector("#region2");
+      const residenceForm = residence ? residence.closest("form") : null;
+
+      if (!residence || !country || !residenceForm) {
+        return false;
+      }
+
+      residence.value = "gb";
+      residence.dispatchEvent(new Event("change", { bubbles: true }));
+      residence.dispatchEvent(new Event("input", { bubbles: true }));
+
+      country.value = "gb";
+      country.dispatchEvent(new Event("change", { bubbles: true }));
+      country.dispatchEvent(new Event("input", { bubbles: true }));
+
+      return true;
+    });
+
+    await page.evaluate(() => {
+      const residence = document.querySelector("#region");
+      const residenceForm = residence ? residence.closest("form") : null;
+
+      if (!residenceForm) {
+        return false;
+      }
+
+      if (typeof residenceForm.requestSubmit === "function") {
+        residenceForm.requestSubmit();
+      } else {
+        residenceForm.submit();
+      }
+
+      return true;
+    });
+    await delay(1500);
+    await page.waitForSelector("a[href='./?disclaimer=accept']", {
+      timeout: 8000,
+      visible: true,
+    });
+
+    await page.evaluate(() => {
+      const acceptLink = document.querySelector("a[href='./?disclaimer=accept']");
+      if (acceptLink) {
+        acceptLink.click();
+        return true;
+      }
+      return false;
+    });
+    await delay(3000);
+  } catch {
+    // TRIG's residence/disclaimer flow is best-effort. If it is absent or
+    // changes shape, continue without turning it into a false site error.
+  }
+}
+
+async function handleIrcpAccessFlow(page, url) {
+  if (!url.includes("ircp.com")) {
+    return;
+  }
+
+  try {
+    await page.waitForSelector("button[name='country'][value='ROW']", {
+      timeout: 8000,
+      visible: true,
+    });
+
+    await page.click("button[name='country'][value='ROW']");
+    await delay(2000);
+  } catch {
+    // IRCP's jurisdiction prompt is best-effort. If it is absent or changes
+    // shape, continue without turning it into a false site error.
+  }
+}
+
 const cookieBannerRules = [
   {
     match: (url) => url.includes("wealthtime.com"),
@@ -76,6 +231,14 @@ const cookieBannerRules = [
   },
   {
     match: (url) => url.includes("hwfpartners.com"),
+    selectors: [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"],
+  },
+  {
+    match: (url) => url.includes("hicl.com"),
+    selectors: [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"],
+  },
+  {
+    match: (url) => url.includes("trig-ltd.com"),
     selectors: [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"],
   },
   {
@@ -272,6 +435,9 @@ async function checkUrl(browser, url) {
       timeout: config.navigationTimeoutMs,
     });
     finalUrl = page.url();
+    await handleHiclAccessFlow(page, finalUrl);
+    await handleTrigAccessFlow(page, finalUrl);
+    await handleIrcpAccessFlow(page, finalUrl);
     await handleKnownCookieBanner(page, finalUrl);
   } catch (error) {
     navigationStatus = "failed";
