@@ -1,0 +1,237 @@
+{
+  "noisePatterns": [
+    "doubleclick\\.net",
+    "googlesyndication\\.com",
+    "google-analytics\\.com",
+    "googletagmanager\\.com",
+    "googleadservices\\.com",
+    "connect\\.facebook\\.net",
+    "facebook\\.com/tr",
+    "bing\\.com",
+    "bat\\.bing",
+    "clarity\\.ms",
+    "hotjar\\.(com|io)",
+    "licdn\\.com",
+    "linkedin\\.com/px",
+    "ads-twitter\\.com",
+    "analytics\\.tiktok\\.com",
+    "snap\\.licdn",
+    "hs-scripts\\.com",
+    "hs-analytics\\.net",
+    "third-party cookie",
+    "ERR_BLOCKED_BY_CLIENT"
+  ],
+  "sites": [
+    {
+      "name": "BII",
+      "url": "https://www.bii.co.uk/en/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "BII Toolkit",
+      "url": "https://toolkit.bii.co.uk/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "BII Finance Toolkit",
+      "url": "https://fintoolkit.bii.co.uk/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "BII Gender Toolkit",
+      "url": "https://gendertoolkit.bii.co.uk/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Orgvue",
+      "url": "https://www.orgvue.com/",
+      "cookieSelectors": ["#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]
+    },
+    {
+      "name": "Wealthtime",
+      "url": "https://www.wealthtime.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "AECF Africa",
+      "url": "https://www.aecfafrica.org/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Antin Infrastructure Partners",
+      "url": "https://www.antin-ip.com/",
+      "cookieSelectors": ["#ccc-notify-accept"]
+    },
+    {
+      "name": "ESR Europe",
+      "url": "https://esr.eu.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "ATLAS Infrastructure",
+      "url": "https://www.atlasinfrastructure.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Beacon Therapeutics",
+      "url": "https://www.beacontx.com/",
+      "cookieSelectors": [".cmplz-btn.cmplz-accept"]
+    },
+    {
+      "name": "HICL Infrastructure",
+      "url": "https://www.hicl.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"],
+      "accessFlow": {
+        "type": "residenceDisclaimer",
+        "residenceSelector": "#region2",
+        "locationSelector": "#region",
+        "value": "united-kingdom"
+      }
+    },
+    {
+      "name": "TRIG",
+      "url": "https://www.trig-ltd.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"],
+      "accessFlow": {
+        "type": "residenceDisclaimer",
+        "residenceSelector": "#region",
+        "locationSelector": "#region2",
+        "value": "gb"
+      }
+    },
+    {
+      "name": "IRCP",
+      "url": "https://www.ircp.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"],
+      "accessFlow": {
+        "type": "clickButton",
+        "selector": "button[name='country'][value='ROW']"
+      }
+    },
+    {
+      "name": "HWF Partners",
+      "url": "https://www.hwfpartners.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Leathwaite",
+      "url": "https://www.leathwaite.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Mecsia",
+      "url": "https://www.mecsia.com/",
+      "cookieSelectors": [".cmplz-btn.cmplz-accept"]
+    },
+    {
+      "name": "One Network (US)",
+      "url": "https://us.one.network/",
+      "cookieSelectors": ["#ccc-notify-accept"]
+    },
+    {
+      "name": "Xiatech",
+      "url": "https://www.xiatech.io/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Harrison Catering",
+      "url": "https://www.harrisoncatering.co.uk/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Geoffrey Harrison Foundation",
+      "url": "https://www.geoffreyharrisonfoundation.org.uk/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Kani Payments",
+      "url": "https://kanipayments.com/",
+      "cookieSelectors": [".cmplz-btn.cmplz-accept"]
+    },
+    {
+      "name": "Tyrus Capital",
+      "url": "https://www.tyruscap.com/",
+      "cookieSelectors": [".cmplz-btn.cmplz-accept"]
+    },
+    {
+      "name": "Cubic3",
+      "url": "https://www.cubic3.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Slingsby Partners",
+      "url": "https://slingsbypartners.com/",
+      "cookieSelectors": [".cookie-wrap .accept"]
+    },
+    {
+      "name": "Syntura",
+      "url": "https://syntura.io/",
+      "cookieSelectors": ["#cn-accept-cookie"]
+    },
+    {
+      "name": "Fenwick Elliott",
+      "url": "https://www.fenwickelliott.com/",
+      "cookieSelectors": [".cmplz-btn.cmplz-accept"]
+    },
+    {
+      "name": "SEIT",
+      "url": "https://www.seitplc.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "SDCL Group",
+      "url": "https://www.sdclgroup.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Somerston",
+      "url": "https://www.somerston.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Somerston Asset Management",
+      "url": "https://www.somerston-am.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Somerston Capital",
+      "url": "https://www.somerstoncapital.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "UKI NETS",
+      "url": "https://www.ukinets.org/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Re-Circulate",
+      "url": "https://www.re-circulate.org/",
+      "cookieSelectors": ["#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]
+    },
+    {
+      "name": "Natilik",
+      "url": "https://www.natilik.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    },
+    {
+      "name": "Hampshire Trust Bank",
+      "url": "https://www.htb.co.uk/",
+      "cookieSelectors": ["#ccc-notify-accept"]
+    },
+    {
+      "name": "Prima",
+      "url": "https://www.helloprima.com/",
+      "cookieSelectors": ["#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]
+    },
+    {
+      "name": "mymediset",
+      "url": "https://mymediset.net/",
+      "cookieSelectors": ["#cookie-consent .btns button:first-of-type"]
+    },
+    {
+      "name": "Wireless Infrastructure Group",
+      "url": "https://www.wirelessinfrastructure.com/",
+      "cookieSelectors": [".moove-gdpr-button-holder .moove-gdpr-infobar-allow-all"]
+    }
+  ]
+}

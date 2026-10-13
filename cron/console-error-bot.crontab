@@ -1,1 +1,1 @@
-*/10 * * * * /Users/tomroper/console-error-bot/scripts/run-check.sh
+0 * * * * /Users/tomroper/console-error-bot/scripts/run-check.sh

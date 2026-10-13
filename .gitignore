@@ -3,3 +3,5 @@ node_modules/
 reports/
 logs/
 .test-alert-once
+.chrome-profile/
+.cron-lock/

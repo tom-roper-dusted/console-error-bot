@@ -15,6 +15,13 @@ fi
 
 mkdir -p "$LOG_DIR"
 
+# A crash or power loss can leave the lock behind forever, silently skipping
+# every future run. Treat a lock older than 90 minutes as stale.
+if [ -d "$LOCK_DIR" ] && [ -n "$(find "$LOCK_DIR" -maxdepth 0 -mmin +90 2>/dev/null)" ]; then
+  printf '[%s] Removing stale lock (older than 90 minutes).\n' "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> "$LOG_DIR/cron.log"
+  rmdir "$LOCK_DIR" 2>/dev/null || rm -rf "$LOCK_DIR"
+fi
+
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   printf '[%s] Skipping run because a previous run is still active.\n' "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> "$LOG_DIR/cron.log"
   exit 0
