@@ -298,17 +298,26 @@ async function checkSiteInSession(context, site, userAgent) {
   // A failed or blocked load says nothing about the banner either way.
   if (navigationStatus !== "ok" || blocked) {
     cookieBanner = { ...cookieBanner, status: "unknown", accepted: false };
-  } else if (
-    cookieBanner.status === "missing" &&
-    failedRequests.some((request) => LOCAL_NETWORK_FAILURE_PATTERN.test(request.failureText))
-  ) {
-    // Banner scripts are often served from a third-party host; if our own
-    // network couldn't reach things, the banner may be fine for real visitors.
-    cookieBanner = {
-      ...cookieBanner,
-      status: "unknown",
-      reason: "network failures on the checking machine",
-    };
+  } else if (cookieBanner.status === "missing") {
+    // Banner scripts are often served from a third-party host, so note any
+    // hosts our own network couldn't reach. Still alert: one unrelated failed
+    // request (e.g. a Cloudflare challenge ping) must not hide a missing banner.
+    const unreachableHosts = [
+      ...new Set(
+        failedRequests
+          .filter((request) => LOCAL_NETWORK_FAILURE_PATTERN.test(request.failureText))
+          .map((request) => {
+            try {
+              return new URL(request.url).hostname;
+            } catch {
+              return request.url;
+            }
+          }),
+      ),
+    ];
+    if (unreachableHosts.length > 0) {
+      cookieBanner = { ...cookieBanner, unreachableHosts };
+    }
   }
 
   return {

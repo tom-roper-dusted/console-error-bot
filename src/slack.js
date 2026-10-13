@@ -118,9 +118,14 @@ function technicalDetails(result) {
 
   if (analysis.cookieBannerMissing) {
     const selectors = result.cookieBanner.selectors.map((selector) => `\`${selector}\``).join(", ");
+    const unreachable = result.cookieBanner.unreachableHosts || [];
+    const caveat =
+      unreachable.length > 0
+        ? `. Note: the checker couldn't reach ${truncate(unreachable.join(", "), 120)}`
+        : "";
     // Goes first so it is never cut off by the per-site detail limit.
     lines.unshift(
-      `• ${analysis.cookieBannerIsNew ? "🆕 " : ""}Cookie banner not shown to a first-time visitor (looked for ${truncate(selectors, 160)})`,
+      `• ${analysis.cookieBannerIsNew ? "🆕 " : ""}Cookie banner not shown to a first-time visitor (looked for ${truncate(selectors, 160)})${caveat}`,
     );
   }
 
